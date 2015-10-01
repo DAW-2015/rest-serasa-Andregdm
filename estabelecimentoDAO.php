@@ -5,9 +5,9 @@ require 'connection.php';
 class EstabelecimentoDAO
 {
 
-  public static function getEstabelecimentoByNome($nome) {
+  public static function getEstabelecimentoByID($id) {
     $connection = Connection::getConnection();
-    $sql = "SELECT * FROM estabelecimentos WHERE nome=$nome";
+    $sql = "SELECT * FROM estabelecimentos WHERE id=$id";
     $result  = mysqli_query($connection, $sql);
     $estabelecimento = mysqli_fetch_object($result);
 
@@ -42,7 +42,7 @@ class EstabelecimentoDAO
     $sql = "UPDATE estabelecimentos SET nome='$estabelecimento->nome', cidades_id=$estabelecimento->cidades_id WHERE id=$id";
     $result  = mysqli_query($connection, $sql);
 
-    $estabelecimentoAtualizado = ClienteDAO::getEstabelecimentoByNome($estabelecimento->nome);
+    $estabelecimentoAtualizado = EstabelecimentoDAO::getEstabelecimentoByID($estabelecimento->id);
     return $estabelecimentoAtualizado;
   }
 
